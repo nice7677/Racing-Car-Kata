@@ -19,11 +19,11 @@ public class LeaderboardTest {
         // setup
 
         // act
-        Map<String, Integer> results = TestData.sampleLeaderboard1.driverResults();
+        DriverResults results = TestData.sampleLeaderboard1.driverResults();
 
         // verify
         assertTrue(results.containsKey("Lewis Hamilton"), "results " + results);
-        assertEquals(18 + 18 + 25, (int) results.get("Lewis Hamilton"));
+        assertEquals(18 + 18 + 25, (int) results.getValueByKey("Lewis Hamilton"));
     }
 
     @Test
