@@ -22,8 +22,8 @@ public class LeaderboardTest {
         DriverResults results = TestData.sampleLeaderboard1.driverResults();
 
         // verify
-        assertTrue(results.containsKey("Lewis Hamilton"), "results " + results);
-        assertEquals(18 + 18 + 25, (int) results.getValueByKey("Lewis Hamilton"));
+        assertTrue(results.containsKey(new Name("Lewis Hamilton")), "results " + results);
+        assertEquals(18 + 18 + 25, (int) results.getValueByKey(new Name("Lewis Hamilton")));
     }
 
     @Test
@@ -31,22 +31,22 @@ public class LeaderboardTest {
         // setup
 
         // act
-        List<String> result = TestData.sampleLeaderboard1.driverRankings();
+        List<Name> result = TestData.sampleLeaderboard1.driverRankings();
 
         // verify
-        assertEquals("Lewis Hamilton", result.get(0));
+        assertEquals(new Name("Lewis Hamilton"), result.get(0));
     }
 
     @Test
     public void itShouldKeepAllDriversWhenSamePoints() {
         // setup
         // bug, drops drivers with same points
-        Race winDriver1 = new Race("Australian Grand Prix", driver1, driver2, driver3);
-        Race winDriver2 = new Race("Malaysian Grand Prix", driver2, driver1, driver3);
+        Race winDriver1 = new Race(new Name("Australian Grand Prix"), driver1, driver2, driver3);
+        Race winDriver2 = new Race(new Name("Malaysian Grand Prix"), driver2, driver1, driver3);
         Leaderboard exEquoLeaderBoard = new Leaderboard(winDriver1, winDriver2);
 
         // act
-        List<String> rankings = exEquoLeaderBoard.driverRankings();
+        List<Name> rankings = exEquoLeaderBoard.driverRankings();
 
         // verify
         assertEquals(Arrays.asList(driver1.getName(), driver2.getName(), driver3.getName()), rankings);
