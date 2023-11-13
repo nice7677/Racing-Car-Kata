@@ -1,16 +1,18 @@
 package tddmicroexercises.leaderboard;
 
+import java.util.Objects;
+
 public class Driver {
 
-    private final String name;
+    private final Name name;
     private final String country;
 
-    public Driver(String name, String country) {
+    public Driver(Name name, String country) {
         this.name = name;
         this.country = country;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
@@ -19,19 +21,21 @@ public class Driver {
     }
 
     @Override
-    public int hashCode() {
-        return name.hashCode() * 31 + country.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Driver driver = (Driver) o;
+
+        if (!Objects.equals(name, driver.name)) return false;
+        return Objects.equals(country, driver.country);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || !(obj instanceof Driver)) {
-            return false;
-        }
-        Driver other = (Driver) obj;
-        return this.name.equals(other.name) && this.country.equals(other.country);
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        return result;
     }
+
 }
