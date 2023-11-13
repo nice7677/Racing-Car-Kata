@@ -7,25 +7,25 @@ import java.util.Set;
 
 public class DriverResults {
 
-    private final Map<String, Integer> values;
+    private final Map<Name, Integer> values;
 
     public DriverResults() {
         this.values = new HashMap<>();
     }
 
-    public Integer getValueByKey(String key) {
+    public Integer getValueByKey(Name key) {
         return values.get(key);
     }
 
-    public void add(String key, Integer value) {
+    public void add(Name key, Integer value) {
         values.put(key, value);
     }
 
-    public boolean containsKey(String key) {
+    public boolean containsKey(Name key) {
         return values.containsKey(key);
     }
 
-    public Set<String> getKeys() {
+    public Set<Name> getKeys() {
         return values.keySet();
     }
 

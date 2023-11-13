@@ -36,7 +36,7 @@ public class Leaderboard {
     }
 
     private void getResult(DriverResults results, Race race, Driver driver) {
-        String driverName = race.getDriverName(driver);
+        Name driverName = race.getDriverNameByDriver(driver);
         int points = race.getPoints(driver);
         if (results.containsKey(driverName)) {
             results.add(driverName, results.getValueByKey(driverName) + points);
@@ -45,14 +45,14 @@ public class Leaderboard {
         results.add(driverName, DEFAULT_POINT + points);
     }
 
-    public List<String> driverRankings() {
+    public List<Name> driverRankings() {
         DriverResults results = driverResults();
-        List<String> resultsList = new ArrayList<>(results.getKeys());
+        List<Name> resultsList = new ArrayList<>(results.getKeys());
         resultsList.sort(new DriverByPointsDescendingComparator(results));
         return resultsList;
     }
 
-    private static final class DriverByPointsDescendingComparator implements Comparator<String> {
+    private static final class DriverByPointsDescendingComparator implements Comparator<Name> {
         private final DriverResults results;
 
         private DriverByPointsDescendingComparator(DriverResults results) {
@@ -60,7 +60,7 @@ public class Leaderboard {
         }
 
         @Override
-        public int compare(String driverName1, String driverName2) {
+        public int compare(Name driverName1, Name driverName2) {
             return -results.getValueByKey(driverName1).compareTo(results.getValueByKey(driverName2));
         }
     }
